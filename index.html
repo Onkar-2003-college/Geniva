@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Geniva: ebooks, digital products, video and visuals from one brief</title>
+<meta name="description" content="Geniva turns one short brief into a draft ebook, digital product, video and visuals. You edit, then publish. In development, early access soon.">
+<meta name="theme-color" content="#0B3C3A">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Geniva: one idea, four formats">
+<meta property="og:description" content="One short brief becomes a draft ebook, digital product, video and visuals. You edit, then publish.">
+<meta property="og:url" content="https://geniva.me/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230B3C3A'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%23F4B223'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Newsreader:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#0B3C3A;
+  --teal-2:#14504D;
+  --ink:#10302E;
+  --muted:#46605D;
+  --mist:#EDF3F0;
+  --sea:#CFE3DC;
+  --gold:#F4B223;
+  --white:#FFFFFF;
+  --focus:#0B3C3A;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --text:"Newsreader",Georgia,"Times New Roman",serif;
+  --wrap:1160px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--mist);color:var(--ink);font-family:var(--text);font-size:1.1875rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:4px}
+.on-dark{--focus:var(--gold)}
+.wrap{width:min(100% - 2.5rem,var(--wrap));margin-inline:auto}
+.skip{position:absolute;left:-999px;top:0;z-index:10;background:var(--gold);color:var(--teal);padding:.75rem 1rem;font-family:var(--display);font-weight:700}
+.skip:focus{left:1rem;top:1rem}
+
+/* Buttons */
+.btn{display:inline-block;font-family:var(--display);font-weight:700;font-size:1.0625rem;line-height:1.2;text-decoration:none;padding:.9rem 1.5rem;border-radius:999px;background:var(--gold);color:var(--teal);border:2px solid var(--gold);transition:transform .15s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn--quiet{background:transparent;color:var(--white);border-color:var(--white)}
+.btn--quiet:hover{background:rgba(255,255,255,.1)}
+.btn--small{padding:.6rem 1.1rem;font-size:1rem}
+
+/* Hero */
+.hero{background:var(--teal);color:var(--white);padding-bottom:clamp(3.5rem,8vw,6.5rem)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding-block:1.5rem}
+.brand{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--display);font-weight:800;font-size:1.65rem;letter-spacing:-.02em;text-decoration:none}
+.brand::before{content:"";width:.8rem;height:.8rem;border-radius:50%;background:var(--gold)}
+.nav__right{display:flex;align-items:center;gap:1.75rem}
+.nav__link{font-family:var(--display);font-weight:600;font-size:1rem;text-decoration:none}
+.nav__link:hover{text-decoration:underline;text-underline-offset:.3em}
+.hero__grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(2rem,5vw,4.5rem);align-items:center;padding-top:clamp(1.5rem,5vw,3.5rem)}
+.status{display:inline-flex;align-items:center;gap:.6rem;margin:0 0 1.5rem;padding:.4rem .9rem;border-radius:999px;background:var(--teal-2);font-family:var(--display);font-weight:600;font-size:.95rem}
+.status::before{content:"";width:.55rem;height:.55rem;border-radius:50%;background:var(--gold)}
+.hero__title{margin:0 0 1.5rem;font-family:var(--display);font-weight:800;font-size:clamp(3rem,7.4vw,5.75rem);line-height:.96;letter-spacing:-.035em}
+.lede{max-width:34rem;margin:0 0 2rem;font-size:clamp(1.2rem,2vw,1.4rem);color:#E3EFEB}
+.cta-row{display:flex;flex-wrap:wrap;gap:.9rem}
+.fine{margin:1.5rem 0 0;font-size:1rem;color:#BFD6D0}
+
+/* Hero illustration: one brief fans out into four formats */
+.fan{width:100%;max-width:30rem;margin-left:auto}
+.brief{margin-bottom:1rem;padding:.85rem 1.1rem;border-radius:16px;background:var(--white);color:var(--ink);font-size:1.05rem;line-height:1.35}
+.brief__label{display:block;margin-bottom:.15rem;font-family:var(--display);font-weight:700;font-size:.85rem;color:var(--muted)}
+.stack{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:minmax(0,1fr);gap:.9rem;aspect-ratio:1/1.02}
+.sheet{position:relative;overflow:hidden;border-radius:18px;color:var(--ink);transform:rotate(var(--r));animation:fan .9s cubic-bezier(.2,.8,.2,1) var(--d) both}
+.sheet__tag{position:absolute;left:.7rem;bottom:.7rem;padding:.25rem .6rem;border-radius:999px;background:var(--white);color:var(--teal);font-family:var(--display);font-weight:700;font-size:.85rem;line-height:1.2}
+.sheet--book{--r:-2.5deg;--d:.1s;--fx:55%;--fy:55%;background:var(--gold)}
+.sheet--product{--r:2deg;--d:.25s;--fx:-55%;--fy:55%;background:var(--white)}
+.sheet--video{--r:-1.5deg;--d:.4s;--fx:55%;--fy:-55%;background:var(--teal-2)}
+.sheet--art{--r:3deg;--d:.55s;--fx:-55%;--fy:-55%;background:var(--sea)}
+@keyframes fan{
+  from{transform:translate(var(--fx),var(--fy)) rotate(0deg) scale(.9);opacity:0}
+  to{transform:translate(0,0) rotate(var(--r));opacity:1}
+}
+.book__title{max-width:9ch;padding:1rem 1rem 0;font-family:var(--display);font-weight:800;font-size:clamp(1.1rem,2.6vw,1.45rem);line-height:1;letter-spacing:-.02em;color:var(--teal)}
+.book__sun{position:absolute;right:-18%;bottom:-14%;width:75%;aspect-ratio:1;border-radius:50%;background:var(--teal)}
+.prod__title{padding:1rem 1rem .6rem;font-family:var(--display);font-weight:700;font-size:1.05rem}
+.prod__rows{margin:0;padding:0 1rem;list-style:none}
+.prod__rows li{display:flex;align-items:center;gap:.6rem;margin-bottom:.7rem}
+.prod__box{flex:none;width:1rem;height:1rem;border-radius:4px;border:2px solid var(--teal)}
+.prod__box--on{background:var(--gold)}
+.prod__line{display:block;width:var(--w);height:.55rem;border-radius:99px;background:var(--sea)}
+.vid__frame{position:absolute;inset:.8rem .8rem 4.2rem;display:grid;place-items:center;border-radius:10px;background:var(--teal)}
+.vid__play{position:relative;width:2.6rem;aspect-ratio:1;border-radius:50%;background:var(--gold)}
+.vid__play::after{content:"";position:absolute;left:54%;top:50%;transform:translate(-50%,-50%);border-style:solid;border-width:.5rem 0 .5rem .8rem;border-color:transparent transparent transparent var(--teal)}
+.vid__bar{position:absolute;left:.8rem;right:.8rem;bottom:3.2rem;height:.35rem;border-radius:99px;background:rgba(255,255,255,.25)}
+.vid__fill{display:block;width:35%;height:100%;border-radius:99px;background:var(--gold)}
+.art__dot{position:absolute;top:12%;left:12%;width:42%;aspect-ratio:1;border-radius:50%;background:var(--gold)}
+.art__tile{position:absolute;top:30%;right:10%;width:38%;height:34%;border-radius:12px;background:var(--white)}
+.art__arch{position:absolute;left:30%;bottom:30%;width:44%;height:22%;border-radius:99px 99px 0 0;background:var(--teal)}
+.fan__note{margin:1rem 0 0;font-size:.95rem;color:#BFD6D0}
+
+/* Sections */
+.section{padding-block:clamp(3.5rem,8vw,6rem)}
+.section--tight{padding-top:0}
+.h2{margin:0 0 1rem;font-family:var(--display);font-weight:700;font-size:clamp(2rem,4.2vw,3rem);line-height:1.05;letter-spacing:-.025em}
+.section__lede{max-width:36rem;margin:0 0 2.5rem;color:var(--muted)}
+.row{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:1rem 2rem;align-items:baseline;padding-block:1.75rem;border-top:3px solid var(--sea)}
+.row:last-of-type{border-bottom:3px solid var(--sea)}
+.row__name{margin:0;font-family:var(--display);font-weight:700;font-size:clamp(1.6rem,3vw,2.25rem);line-height:1.05;letter-spacing:-.02em}
+.row__text{max-width:34rem;margin:0}
+.who{max-width:40rem;margin:2rem 0 0;font-size:1.25rem}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2rem;margin:2.5rem 0 0;padding:0;list-style:none}
+.step__n{display:grid;place-items:center;width:2.75rem;height:2.75rem;margin-bottom:1rem;border-radius:50%;background:var(--gold);color:var(--teal);font-family:var(--display);font-weight:800;font-size:1.25rem}
+.step__name{margin:0 0 .4rem;font-family:var(--display);font-weight:700;font-size:1.4rem;line-height:1.15}
+.step__text{margin:0}
+.panel{padding:clamp(1.75rem,5vw,3.5rem);border-radius:28px;background:var(--sea)}
+.panel p{max-width:40rem;margin:0 0 1rem}
+.panel__note{margin-bottom:0;font-size:1rem}
+
+/* Contact + footer */
+.contact{background:var(--teal);color:var(--white);padding-block:clamp(3.5rem,8vw,6rem)}
+.contact__grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:2rem clamp(2rem,5vw,4rem);align-items:center}
+.contact__text{max-width:32rem;margin:0;color:#E3EFEB}
+.contact__box .fine{margin-top:1.25rem}
+.foot{padding-block:1.5rem;background:var(--teal);color:#BFD6D0;border-top:1px solid rgba(255,255,255,.15);font-size:1rem}
+
+/* Small screens */
+@media (max-width:860px){
+  .hero__grid,.contact__grid{grid-template-columns:minmax(0,1fr)}
+  .fan{margin-left:0}
+  .nav__link{display:none}
+  .row{grid-template-columns:minmax(0,1fr);gap:.5rem}
+  .steps{grid-template-columns:minmax(0,1fr)}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .sheet{animation:none}
+  .btn{transition:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hero on-dark">
+  <div class="wrap">
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="/">Geniva</a>
+      <div class="nav__right">
+        <a class="nav__link" href="#formats">Formats</a>
+        <a class="nav__link" href="#how">How it works</a>
+        <a class="nav__link" href="#claude">Claude</a>
+        <a class="btn btn--small" href="#early-access">Join early access</a>
+      </div>
+    </nav>
+
+    <div class="hero__grid">
+      <div>
+        <p class="status">In development</p>
+        <h1 class="hero__title">One idea. Four formats.</h1>
+        <p class="lede">Write a short brief. Geniva drafts an ebook, a digital product, a video and the visuals to go with them. You edit, then publish.</p>
+        <div class="cta-row">
+          <a class="btn" href="#early-access">Join early access</a>
+          <a class="btn btn--quiet" href="#how">See how it works</a>
+        </div>
+        <p class="fine">Early access opens to a small group first.</p>
+      </div>
+
+      <div class="fan">
+        <div class="brief"><span class="brief__label">Example brief</span>A beginner's guide to starting a home bakery</div>
+        <div class="stack" aria-hidden="true">
+          <div class="sheet sheet--book">
+            <div class="book__title">Home bakery, day one</div>
+            <span class="book__sun"></span>
+            <span class="sheet__tag">Ebook</span>
+          </div>
+          <div class="sheet sheet--product">
+            <div class="prod__title">Pricing sheet</div>
+            <ul class="prod__rows">
+              <li><span class="prod__box prod__box--on"></span><span class="prod__line" style="--w:80%"></span></li>
+              <li><span class="prod__box"></span><span class="prod__line" style="--w:60%"></span></li>
+              <li><span class="prod__box"></span><span class="prod__line" style="--w:70%"></span></li>
+            </ul>
+            <span class="sheet__tag">Product</span>
+          </div>
+          <div class="sheet sheet--video">
+            <div class="vid__frame"><span class="vid__play"></span></div>
+            <div class="vid__bar"><span class="vid__fill"></span></div>
+            <span class="sheet__tag">Video</span>
+          </div>
+          <div class="sheet sheet--art">
+            <span class="art__dot"></span>
+            <span class="art__tile"></span>
+            <span class="art__arch"></span>
+            <span class="sheet__tag">Visuals</span>
+          </div>
+        </div>
+        <p class="fan__note">Illustration of the idea we're building.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="section" id="formats">
+    <div class="wrap">
+      <h2 class="h2">What Geniva makes</h2>
+      <p class="section__lede">Pick one format, or make all four from the same brief.</p>
+
+      <article class="row">
+        <h3 class="row__name">Ebooks</h3>
+        <p class="row__text">An outline, chapters and a cover from your brief. Edit every page before you export.</p>
+      </article>
+      <article class="row">
+        <h3 class="row__name">Digital products</h3>
+        <p class="row__text">Templates, checklists, planners and guides you can sell as downloads.</p>
+      </article>
+      <article class="row">
+        <h3 class="row__name">Video</h3>
+        <p class="row__text">Short videos with a script, scenes and captions, for social posts or course intros.</p>
+      </article>
+      <article class="row">
+        <h3 class="row__name">AI visuals</h3>
+        <p class="row__text">Images and graphics that match the rest of your set, so everything looks like one brand.</p>
+      </article>
+
+      <p class="who">Made for creators, coaches and small shops that sell digital downloads and want to publish more in less time.</p>
+    </div>
+  </section>
+
+  <section class="section section--tight" id="how">
+    <div class="wrap">
+      <h2 class="h2">How it works</h2>
+      <ol class="steps">
+        <li>
+          <span class="step__n">1</span>
+          <h3 class="step__name">Write a brief</h3>
+          <p class="step__text">Say what you want to make and who it's for, in a few lines.</p>
+        </li>
+        <li>
+          <span class="step__n">2</span>
+          <h3 class="step__name">Review the drafts</h3>
+          <p class="step__text">Geniva drafts each format. You compare them side by side.</p>
+        </li>
+        <li>
+          <span class="step__n">3</span>
+          <h3 class="step__name">Edit and publish</h3>
+          <p class="step__text">Change anything, export your files, then sell or share them where you like.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--tight" id="claude">
+    <div class="wrap">
+      <div class="panel">
+        <h2 class="h2">Building on Claude</h2>
+        <p>We're building Geniva on Claude, Anthropic's AI model, through the Claude API. Claude writes the text: outlines, chapters, scripts and product copy. You decide what gets published.</p>
+        <p class="panel__note">Geniva is an independent project and is not affiliated with Anthropic.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact on-dark" id="early-access">
+    <div class="wrap contact__grid">
+      <div>
+        <h2 class="h2">Get early access</h2>
+        <p class="contact__text">We're opening to a small group first. Email a line about what you'd make and we'll write back.</p>
+      </div>
+      <div class="contact__box">
+        <a class="btn" href="mailto:onkar@geniva.me?subject=Geniva%20early%20access&amp;body=Hi%2C%20I%27d%20like%20early%20access.%0A%0AI%20would%20make%3A%20">Email Geniva</a>
+        <p class="fine"><a href="mailto:onkar@geniva.me">onkar@geniva.me</a></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot on-dark">
+  <div class="wrap">&copy; 2026 Geniva</div>
+</footer>
+</body>
+</html>
