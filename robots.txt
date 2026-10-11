@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://geniva.me/sitemap.xml
